@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XDXD STORE | UNCHEK CENTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #020205;
+            --neon-blue: #00f2ff;
+            --neon-pink: #ff00e5;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(0, 242, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 50%, #0a0a20 0%, #020205 100%);
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* Header & Neon Flicker */
+        header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+            animation: flicker 3s infinite;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            letter-spacing: 5px;
+            color: var(--neon-blue);
+            opacity: 0.8;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Animations */
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+            }
+            20%, 24%, 55% { text-shadow: none; color: #111; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Game Icons Bar */
+        .game-icons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .game-icons i {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            animation: float 4s ease-in-out infinite;
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 50%;
+            background: var(--glass);
+        }
+
+        /* Grid Layout */
+        .container {
+            max-width: 1100px;
+            margin: -50px auto 100px;
+            padding: 0 20px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Glassmorphism Card */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            transition: 0.4s;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--neon-blue);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--neon-blue));
+            animation: rotate 6s linear infinite;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #fff;
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 10px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .price-item .qty {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--neon-blue);
+        }
+
+        .price-item .val {
+            background: rgba(0, 242, 255, 0.1);
+            padding: 2px 12px;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* Payment & Rules Section */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 4px solid var(--neon-blue);
+        }
+
+        .info-box h4 {
+            color: var(--neon-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Order Button Animated */
+        .btn-order {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: linear-gradient(45deg, #00f2ff, #0066ff);
+            color: #000;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+        }
+
+        .btn-order:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px var(--neon-blue);
+            color: #fff;
+        }
+
+        .btn-order::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(45deg);
+            transition: 0.5s;
+            left: -150%;
+        }
+
+        .btn-order:hover::after {
+            left: 150%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            opacity: 0.6;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            header { height: 50vh; }
+            .container { margin-top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">XDXD STORE</div>
+        <div class="subtitle">UNCHEK FRESH PROVIDER</div>
+        
+        <div class="game-icons">
+            <i class="fas fa-gamepad" style="animation-delay: 0s;"></i>
+            <i class="fas fa-ghost" style="animation-delay: 0.5s;"></i>
+            <i class="fas fa-shield-alt" style="animation-delay: 1s;"></i>
+            <i class="fas fa-bolt" style="animation-delay: 1.5s;"></i>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="pricing-grid">
+            <!-- Paket Original -->
+            <div class="card">
+                <h3><i class="fas fa-box-open"></i> PAKET ORIGINAL</h3>
+                <div class="price-item"><span>5K</span> <span class="qty">40 UNCHEK</span></div>
+                <div class="price-item"><span>10K</span> <span class="qty">80 UNCHEK</span></div>
+                <div class="price-item"><span>20K</span> <span class="qty">90 UNCHEK</span></div>
+                <div class="price-item"><span>30K</span> <span class="qty">110 UNCHEK</span></div>
+                <div class="price-item"><span>50K</span> <span class="qty">150 UNCHEK</span></div>
+                <div class="price-item"><span>80K</span> <span class="qty">200 UNCHEK</span></div>
+                <div class="price-item"><span>100K</span> <span class="qty">280 UNCHEK</span></div>
+            </div>
+
+            <!-- Paket Hemat -->
+            <div class="card" style="border-color: var(--neon-pink);">
+                <h3 style="border-color: var(--neon-pink);"><i class="fas fa-bolt"></i> PAKET HEMAT</h3>
+                <div class="price-item"><span>3K</span> <span class="qty" style="color:var(--neon-pink)">10 UNCHEK</span></div>
+                <div class="price-item"><span>7K</span> <span class="qty" style="color:var(--neon-pink)">17 UNCHEK</span></div>
+                <div class="price-item"><span>10K</span> <span class="qty" style="color:var(--neon-pink)">80 UNCHEK</span></div>
+                <div class="price-item"><span>13K</span> <span class="qty" style="color:var(--neon-pink)">84 UNCHEK</span></div>
+                <div class="price-item"><span>20K</span> <span class="qty" style="color:var(--neon-pink)">90 UNCHEK</span></div>
+                <div class="price-item"><span>24K</span> <span class="qty" style="color:var(--neon-pink)">98 UNCHEK</span></div>
+                <div class="price-item"><span>28K</span> <span class="qty" style="color:var(--neon-pink)">100 UNCHEK</span></div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-box">
+                <h4><i class="fas fa-credit-card"></i> PAYMENT</h4>
+                <p>DANA • QRIS • GOPAY</p>
+            </div>
+            <div class="info-box" style="border-left-color: #ff9900;">
+                <h4><i class="fas fa-info-circle"></i> RULES</h4>
+                <p>No Reff / No Garansi. Membeli berarti setuju.</p>
+            </div>
+        </div>
+
+        <a href="https://wa.me/6285210815266?text=Halo%20min%20saya%20ingin%20order%20UNCHEK" class="btn-order">
+            <i class="fab fa-whatsapp"></i> ORDER SEKARANG
+        </a>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 XDXD STORE. ALL SYSTEMS OPERATIONAL.</p>
+        <p>FAST RESPOND • READY STOK • TERPERCAYA</p>
+    </footer>
+
+</body>
+</html>
